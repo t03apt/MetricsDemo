@@ -1,0 +1,3 @@
+[submodule "submodules/aspire-samples"]
+	path = submodules/aspire-samples
+	url = https://github.com/dotnet/aspire-samples

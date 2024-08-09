@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspire-samples submodule", "aspire-samples submodule", "{C05DB4D5-8969-4290-B3B3-90A340F28736}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{667FB52B-11A4-47DA-84D1-56BF76839AFB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.gitmodules = .gitmodules
+		global.json = global.json
+		NuGet.config = NuGet.config
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetricsApp.Client", "submodules\aspire-samples\samples\Metrics\MetricsApp.Client\MetricsApp.Client.csproj", "{A0D992CE-421D-4403-A522-862D763514A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{09A89488-A082-41AF-8E88-C63143C0FB35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppHost", "src\AppHost\AppHost.csproj", "{D60587F2-CAB5-4790-844C-366B64B0C4A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceDefaults", "src\ServiceDefaults\ServiceDefaults.csproj", "{6AF7DC40-447E-4344-9C7E-930A5CD00720}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetricsApp", "src\MetricsApp\MetricsApp.csproj", "{E6B9D443-7913-43D0-9348-F2530E92321E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0D992CE-421D-4403-A522-862D763514A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D992CE-421D-4403-A522-862D763514A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D992CE-421D-4403-A522-862D763514A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D992CE-421D-4403-A522-862D763514A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60587F2-CAB5-4790-844C-366B64B0C4A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60587F2-CAB5-4790-844C-366B64B0C4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60587F2-CAB5-4790-844C-366B64B0C4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60587F2-CAB5-4790-844C-366B64B0C4A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF7DC40-447E-4344-9C7E-930A5CD00720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF7DC40-447E-4344-9C7E-930A5CD00720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF7DC40-447E-4344-9C7E-930A5CD00720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF7DC40-447E-4344-9C7E-930A5CD00720}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B9D443-7913-43D0-9348-F2530E92321E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B9D443-7913-43D0-9348-F2530E92321E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B9D443-7913-43D0-9348-F2530E92321E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B9D443-7913-43D0-9348-F2530E92321E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A0D992CE-421D-4403-A522-862D763514A8} = {C05DB4D5-8969-4290-B3B3-90A340F28736}
+		{D60587F2-CAB5-4790-844C-366B64B0C4A7} = {09A89488-A082-41AF-8E88-C63143C0FB35}
+		{6AF7DC40-447E-4344-9C7E-930A5CD00720} = {09A89488-A082-41AF-8E88-C63143C0FB35}
+		{E6B9D443-7913-43D0-9348-F2530E92321E} = {09A89488-A082-41AF-8E88-C63143C0FB35}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {894971D0-0F0D-4664-AB57-7BD23A1DBD49}
+	EndGlobalSection
+EndGlobal
