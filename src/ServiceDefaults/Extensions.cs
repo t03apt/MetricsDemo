@@ -44,12 +44,15 @@ public static class Extensions
             {
                 metrics.AddAspNetCoreInstrumentation()
                        .AddHttpClientInstrumentation()
-                       .AddRuntimeInstrumentation();
+                       .AddRuntimeInstrumentation()
+                       .AddMeter("MassTransit*");
+                ;
             })
             .WithTracing(tracing =>
             {
                 tracing.AddAspNetCoreInstrumentation()
-                       .AddHttpClientInstrumentation();
+                       .AddHttpClientInstrumentation()
+                       .AddSource("MassTransit*");
             });
 
         builder.AddOpenTelemetryExporters();

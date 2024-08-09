@@ -22,6 +22,9 @@ builder.AddProject<Projects.MetricsApp>("app")
        .WithEnvironment("GRAFANA_URL", grafana.GetEndpoint("http"))
        .WithReference(kafka);
 
+builder.AddProject<Projects.MassTransitConsumer>("masstransit-consumer")
+       .WithReference(kafka);
+
 using var app = builder.Build();
 
 await app.RunAsync();

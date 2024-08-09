@@ -4,7 +4,7 @@ using Confluent.Kafka;
 
 namespace Contracts.Serializers;
 
-public class AvroSerializer<T> : IAsyncSerializer<T>
+public class AvroSerializer<T> : IAsyncSerializer<T>, IDeserializer<T>
     where T : ISpecificRecord, new()
 {
     public static byte[] Serialize(T objectToSerialize)
@@ -27,5 +27,10 @@ public class AvroSerializer<T> : IAsyncSerializer<T>
     public Task<byte[]> SerializeAsync(T data, SerializationContext context)
     {
         return Task.FromResult(Serialize(data));
+    }
+
+    public T Deserialize(ReadOnlySpan<byte> data, bool isNull, SerializationContext context)
+    {
+        return Deserialize(data.ToArray());
     }
 }

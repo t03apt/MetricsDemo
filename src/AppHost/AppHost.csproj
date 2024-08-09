@@ -15,7 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MassTransitConsumer\MassTransitConsumer.csproj" />
     <ProjectReference Include="..\MetricsApp\MetricsApp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="otel-collector\config.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

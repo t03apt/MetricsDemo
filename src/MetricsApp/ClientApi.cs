@@ -1,9 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using Avro;
 using Confluent.Kafka;
 using Contracts;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OpenTelemetry;
 using OpenTelemetry.Context.Propagation;
 
@@ -53,7 +51,7 @@ public static class ClientApi
                     Propagators.DefaultTextMapPropagator.Inject(propagationContext, message, InjectTraceContext);
                 }
 
-                await producer.ProduceAsync("forecast", message);
+                await producer.ProduceAsync(KafkaTopics.Forecast, message);
             }
 
             return results.Select(WeatherForecastViewModel.ConvertFromWeatherForecast);

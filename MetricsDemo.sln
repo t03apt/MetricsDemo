@@ -30,6 +30,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContractGenerator", "src\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "src\Contracts\Contracts.csproj", "{512324A2-339D-4C5B-BBC7-A2D03D4BB5D2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "downstream", "downstream", "{9DAF9FC3-43DA-4F38-AF14-CF0E63CF34E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransitConsumer", "src\MassTransitConsumer\MassTransitConsumer.csproj", "{FBCE82C8-D06B-4337-8D0E-61769E8F3D37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +64,10 @@ Global
 		{512324A2-339D-4C5B-BBC7-A2D03D4BB5D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{512324A2-339D-4C5B-BBC7-A2D03D4BB5D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{512324A2-339D-4C5B-BBC7-A2D03D4BB5D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBCE82C8-D06B-4337-8D0E-61769E8F3D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBCE82C8-D06B-4337-8D0E-61769E8F3D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBCE82C8-D06B-4337-8D0E-61769E8F3D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBCE82C8-D06B-4337-8D0E-61769E8F3D37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,8 @@ Global
 		{E6B9D443-7913-43D0-9348-F2530E92321E} = {09A89488-A082-41AF-8E88-C63143C0FB35}
 		{3A3D71E1-AD67-4210-B6F4-8687EFE2F080} = {09A89488-A082-41AF-8E88-C63143C0FB35}
 		{512324A2-339D-4C5B-BBC7-A2D03D4BB5D2} = {09A89488-A082-41AF-8E88-C63143C0FB35}
+		{9DAF9FC3-43DA-4F38-AF14-CF0E63CF34E2} = {09A89488-A082-41AF-8E88-C63143C0FB35}
+		{FBCE82C8-D06B-4337-8D0E-61769E8F3D37} = {9DAF9FC3-43DA-4F38-AF14-CF0E63CF34E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {894971D0-0F0D-4664-AB57-7BD23A1DBD49}
