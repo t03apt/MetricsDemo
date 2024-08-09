@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MetricsApp;
+using Confluent.Kafka;
+using Contracts;
+using Contracts.Serializers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +22,9 @@ builder.Services.AddIdentityCore<MyUser>()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.AddKafkaProducer<string, string>("kafka");
+builder.AddKafkaProducer<Null, WeatherForecast>("kafka", producerBuilder => {
+    producerBuilder.SetValueSerializer(new AvroSerializer<WeatherForecast>());
+});
 
 var app = builder.Build();
 

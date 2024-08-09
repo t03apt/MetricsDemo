@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "WeatherForecast",
+  "namespace": "Contracts",
+  "fields": [
+    {
+      "name": "Date",
+      "type": {
+        "type": "int",
+        "logicalType": "date"
+      }
+    },
+    {
+      "name": "Summary",
+      "type": "string"
+    },
+    {
+      "name": "TemperatureC",
+      "type": "int"
+    }
+  ]
+}

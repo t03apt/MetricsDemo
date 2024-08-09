@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\submodules\aspire-samples\samples\Metrics\MetricsApp.Client\MetricsApp.Client.csproj" />
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\ServiceDefaults\ServiceDefaults.csproj" />
   </ItemGroup>
 
