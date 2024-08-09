@@ -19,6 +19,8 @@ builder.Services.AddIdentityCore<MyUser>()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.AddKafkaProducer<string, string>("kafka");
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();

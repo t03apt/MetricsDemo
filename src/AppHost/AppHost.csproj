@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.*-*" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.*" />
     <PackageReference Include="Aspire.Hosting.Kafka" Version="8.*-*" />
     <PackageReference Include="PracticalOtel.OtelCollector.Aspire" Version="0.9.6-rc" />
   </ItemGroup>
