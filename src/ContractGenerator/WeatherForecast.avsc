@@ -15,8 +15,16 @@
       "type": "string"
     },
     {
-      "name": "TemperatureC",
+      "name": "Temperature",
       "type": "int"
+    },
+    {
+      "name": "Unit",
+      "type": {
+        "type": "enum",
+        "name": "TemperatureUnit",
+        "symbols": [ "Celsius", "Fahrenheit" ]
+      }
     }
   ]
 }

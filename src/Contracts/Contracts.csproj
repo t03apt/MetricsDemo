@@ -11,4 +11,8 @@
 		<PackageReference Include="Confluent.Kafka" Version="2.*" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Generated\" />
+	</ItemGroup>
+
 </Project>

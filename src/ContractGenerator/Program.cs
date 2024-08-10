@@ -1,6 +1,6 @@
 ﻿using Avro;
 
-var outputFolder = Path.GetFullPath(Path.Join(Directory.GetCurrentDirectory(), "../../../../Contracts"));
+var outputFolder = Path.GetFullPath(Path.Join(Directory.GetCurrentDirectory(), "../../../../Contracts/Generated"));
 var codeGen = new CodeGen();
 
 var schemaFiles = Directory.GetFiles("../../../", "*.avsc")

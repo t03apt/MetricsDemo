@@ -28,8 +28,9 @@ public static class ClientApi
             var results = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.Date.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = s_summaries[Random.Shared.Next(s_summaries.Length)]
+                Temperature = Random.Shared.Next(-20, 55),
+                Summary = s_summaries[Random.Shared.Next(s_summaries.Length)],
+                Unit = TemperatureUnit.Celsius
             }).ToArray();
 
 
@@ -37,12 +38,7 @@ public static class ClientApi
             {
                 var message = new Message<Null, WeatherForecast>
                 {
-                    Value = new WeatherForecast
-                    {
-                        Date = forecast.Date,
-                        Summary = forecast.Summary,
-                        TemperatureC = forecast.TemperatureC
-                    }
+                    Value = forecast
                 };
 
                 var propagationContext = Activity.Current != null ? new PropagationContext(Activity.Current.Context, Baggage.Current) : default;
@@ -51,10 +47,17 @@ public static class ClientApi
                     Propagators.DefaultTextMapPropagator.Inject(propagationContext, message, InjectTraceContext);
                 }
 
-                await producer.ProduceAsync(KafkaTopics.Forecast, message);
+                await producer.ProduceAsync(KafkaTopics.ForecastsInCelsius, message);
             }
 
-            return results.Select(WeatherForecastViewModel.ConvertFromWeatherForecast);
+            return results.Select(forecast =>
+                 new WeatherForecastViewModel
+                 {
+                     Date = DateOnly.FromDateTime(forecast.Date),
+                     Summary = forecast.Summary,
+                     TemperatureC = forecast.Unit == TemperatureUnit.Celsius ? forecast.Temperature : throw new InvalidOperationException()
+                 }
+            );
         }).RequireAuthorization();
 
         endpoints.MapGet("startup", () =>
@@ -78,15 +81,5 @@ public static class ClientApi
         public int TemperatureC { get; set; }
         public string? Summary { get; set; }
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-        public static WeatherForecastViewModel ConvertFromWeatherForecast(WeatherForecast forecast)
-        {
-            return new WeatherForecastViewModel
-            {
-                Date = DateOnly.FromDateTime(forecast.Date),
-                Summary = forecast.Summary,
-                TemperatureC = forecast.TemperatureC
-            };
-        }
     }
 }

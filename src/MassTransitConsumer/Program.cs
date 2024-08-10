@@ -4,6 +4,7 @@ using Confluent.Kafka.Admin;
 using Contracts;
 using Contracts.Serializers;
 using MassTransit;
+using MassTransit.Monitoring;
 using MassTransitConsumer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +23,11 @@ builder.Services.AddOpenTelemetry()
         tracing.AddSource(Instrumentation.ActivitySource.Name);
     });
 
+builder.Services.Configure<InstrumentationOptions>(options =>
+{
+    // options.ReceiveTotal = "mt.receive.total";
+});
+
 builder.Services.AddMassTransit(x =>
 {
     x.UsingInMemory();
@@ -37,35 +43,43 @@ builder.Services.AddMassTransit(x =>
             k.ClientId = "Consumer";
             k.Host(kafkaBroker);
 
-            k.TopicEndpoint<WeatherForecast>(KafkaTopics.Forecast, "my-consumer-group", e =>
+            k.TopicEndpoint<WeatherForecast>(KafkaTopics.ForecastsInCelsius, "my-consumer-group", e =>
             {
                 e.SetValueDeserializer(new AvroSerializer<WeatherForecast>());
                 e.ConfigureConsumer<ConsumerWorker>(context);
             });
         });
+
+        rider.AddProducer<WeatherForecast>(KafkaTopics.ForecastsInFahrenheit, (context, cfg) =>
+        {
+            cfg.SetValueSerializer(new AvroSerializer<WeatherForecast>());
+        });
     });
 });
 
-await EnsureTopicExists(kafkaBroker, KafkaTopics.Forecast);
+await EnsureTopicExists(kafkaBroker, KafkaTopics.ForecastsInCelsius, KafkaTopics.ForecastsInFahrenheit);
 
 await builder.Build().RunAsync();
 
-static async Task<IAdminClient> EnsureTopicExists(string? kafkaBroker, string topic)
+static async Task<IAdminClient> EnsureTopicExists(string? kafkaBroker, params string[] topics)
 {
     using var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = kafkaBroker }).Build();
-    var spec = new TopicSpecification { Name = topic, ReplicationFactor = 1, NumPartitions = 1 };
-    try
+    foreach (var topic in topics)
     {
-        await adminClient.CreateTopicsAsync([spec]);
-    }
-    catch (CreateTopicsException ex) when (ex.Message.Contains("already exists", StringComparison.OrdinalIgnoreCase))
-    {
+        var spec = new TopicSpecification { Name = topic, ReplicationFactor = 1, NumPartitions = 1 };
+        try
+        {
+            await adminClient.CreateTopicsAsync([spec]);
+        }
+        catch (CreateTopicsException ex) when (ex.Message.Contains("already exists", StringComparison.OrdinalIgnoreCase))
+        {
+        }
     }
 
     return adminClient;
 }
 
-sealed class ConsumerWorker(ILogger<ConsumerWorker> logger) : IConsumer<WeatherForecast>
+sealed class ConsumerWorker(ILogger<ConsumerWorker> logger, ITopicProducer<WeatherForecast> topicProducer) : IConsumer<WeatherForecast>
 {
     private readonly Random random = new();
 
@@ -82,6 +96,19 @@ sealed class ConsumerWorker(ILogger<ConsumerWorker> logger) : IConsumer<WeatherF
 
         // wait like we were doing something with the message
         await Task.Delay(random.Next(100, 1000));
+
+        if (context.Message.Unit != TemperatureUnit.Celsius)
+        {
+            throw new InvalidOperationException();
+        }
+
+        await topicProducer.Produce(new WeatherForecast
+        {
+            Date = context.Message.Date,
+            Summary = context.Message.Summary,
+            Temperature = 32 + (int)(context.Message.Temperature / 0.5556),
+            Unit = context.Message.Unit
+        });
     }
 
     private static PropagationContext ExtractPropagationContext(MassTransit.Headers metadata)
