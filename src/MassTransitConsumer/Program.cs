@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Avro;
 using Confluent.Kafka;
 using Confluent.Kafka.Admin;
 using Contracts;
@@ -113,6 +112,11 @@ class ActivityEnricherReceiveObserver : IReceiveObserver
 
     public Task PreReceive(ReceiveContext context)
     {
+        if (context is KafkaConsumeContext kafkaContext)
+        {
+            context.AddMetricTags("topic", kafkaContext.Topic);
+        }
+
         if (Activity.Current != null)
         {
             var propagationContext = ExtractPropagationContext(context.TransportHeaders);
