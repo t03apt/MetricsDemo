@@ -1,5 +1,8 @@
 # MetricsDemo (alpha)
 
+## RED dashboard
+![resources](./images/red-dashboard.png)
+
 ## Inspired by
 - https://play.grafana.org/d/000000109/the-four-golden-signals
 - https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/#the-four-golden-signals
