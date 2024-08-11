@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Data;
+using System.Diagnostics;
 using Confluent.Kafka;
 using Confluent.Kafka.Admin;
 using Contracts;
@@ -81,8 +82,6 @@ static async Task<IAdminClient> EnsureTopicExists(string? kafkaBroker, params st
 
 sealed class ConsumerWorker(ILogger<ConsumerWorker> logger, ITopicProducer<WeatherForecast> topicProducer) : IConsumer<WeatherForecast>
 {
-    private readonly Random random = new();
-
     public async Task Consume(ConsumeContext<WeatherForecast> context)
     {
         logger.LogInformation("Received message: {Message}", context.Message);
@@ -95,7 +94,13 @@ sealed class ConsumerWorker(ILogger<ConsumerWorker> logger, ITopicProducer<Weath
         }
 
         // wait like we were doing something with the message
-        await Task.Delay(random.Next(100, 1000));
+        var waitTime = Random.Shared.Next(100, 1000);
+        await Task.Delay(waitTime);
+
+        if (waitTime % 2 == 0)
+        {
+            throw new InvalidOperationException("fail half of the messages messages");
+        }
 
         if (context.Message.Unit != TemperatureUnit.Celsius)
         {
