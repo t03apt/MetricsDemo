@@ -31,7 +31,7 @@
       },
       "id": 16,
       "panels": [],
-      "title": "$k8s_pod_name",
+      "title": "$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name",
       "type": "row"
     },
     {
