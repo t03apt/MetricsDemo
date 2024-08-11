@@ -17,7 +17,25 @@ processors:
       - key: environment
         value: development
         action: insert
-    
+      - key: k8s_namespace_name
+        value: default
+        action: insert
+  metricstransform:
+    transforms:
+      - include: .*
+        match_type: regexp
+        action: update
+        operations:
+          - action: add_label
+            new_label: environment
+            new_value: preprod
+  transform/attributes:
+    metric_statements:
+      - context: datapoint
+        statements:
+        - set(attributes["k8s_pod_name"], resource.attributes["service.instance.id"])
+        - set(attributes["k8s_statefulset_name"], resource.attributes["service.name"])
+        - set(attributes["full_service_name"], Concat([attributes["k8s_namespace_name"], attributes["k8s_statefulset_name"], attributes["k8s_pod_name"]], "/"))
 
 exporters:
   otlp/aspire:
@@ -38,16 +56,19 @@ service:
         - batch
         - filter/healthcheck
         - attributes/defaults
+        - transform/attributes
       exporters: [otlp/aspire]
     metrics:
       receivers: [otlp]
       processors: 
         - batch
         - attributes/defaults
+        - transform/attributes
       exporters: [otlp/aspire, prometheus]
     logs:
       receivers: [otlp]
       processors: 
         - batch
         - attributes/defaults
+        - transform/attributes
       exporters: [otlp/aspire]
