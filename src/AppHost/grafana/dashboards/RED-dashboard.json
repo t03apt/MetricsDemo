@@ -1589,10 +1589,10 @@
         "current": {
           "selected": true,
           "text": [
-            "default"
+            "All"
           ],
           "value": [
-            "default"
+            "$__all"
           ]
         },
         "datasource": {
@@ -1601,7 +1601,7 @@
         },
         "definition": "label_values(k8s_namespace_name)",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "multi": true,
         "name": "k8s_namespace_name",
         "options": [],
@@ -1617,7 +1617,7 @@
         "type": "query"
       },
       {
-        "allValue": ".*",
+        "allValue": ".+",
         "current": {
           "selected": true,
           "text": [
@@ -1649,7 +1649,7 @@
         "type": "query"
       },
       {
-        "allValue": ".*",
+        "allValue": ".+",
         "current": {
           "selected": true,
           "text": [
