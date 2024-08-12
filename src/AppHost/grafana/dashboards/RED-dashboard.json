@@ -139,7 +139,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.5, sum(rate(http_server_request_duration_seconds_bucket{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\"}[$__rate_interval])) by (le))",
+          "expr": "histogram_quantile(0.5, sum(rate(http_server_request_duration_seconds_bucket{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\"}[$__rate_interval])) by (le))",
           "instant": false,
           "legendFormat": "OK (p50)",
           "range": true,
@@ -151,7 +151,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.25, sum(rate(http_server_request_duration_seconds_bucket{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",error_type=~\".+\"}[$__rate_interval])) by (le))",
+          "expr": "histogram_quantile(0.25, sum(rate(http_server_request_duration_seconds_bucket{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",error_type=~\".+\"}[$__rate_interval])) by (le))",
           "hide": false,
           "instant": false,
           "legendFormat": "Errors (p25)",
@@ -267,7 +267,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(http_server_request_duration_seconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\"}[$__rate_interval]))",
+          "expr": "sum(rate(http_server_request_duration_seconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\"}[$__rate_interval]))",
           "instant": false,
           "legendFormat": "Requests/s",
           "range": true,
@@ -279,7 +279,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(http_server_request_duration_seconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",http_response_status_code!~\"2..\"}[$__rate_interval]))",
+          "expr": "sum(rate(http_server_request_duration_seconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",http_response_status_code!~\"2..\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Error Requests/s",
@@ -396,7 +396,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(http_server_request_duration_seconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",error_type=~\".+\"}[$__rate_interval])) by (error_type)",
+          "expr": "sum(rate(http_server_request_duration_seconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",error_type=~\".+\"}[$__rate_interval])) by (error_type)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{error_type}}",
@@ -512,7 +512,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.5, sum(rate(messaging_masstransit_consume_duration_milliseconds_bucket{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\"}[$__rate_interval])) by (le)) / 1000",
+          "expr": "histogram_quantile(0.5, sum(rate(messaging_masstransit_consume_duration_milliseconds_bucket{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\"}[$__rate_interval])) by (le)) / 1000",
           "instant": false,
           "legendFormat": "OK (p50)",
           "range": true,
@@ -524,7 +524,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.25, sum(rate(messaging_masstransit_consume_duration_milliseconds_bucket{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval])) by (le)) / 1000",
+          "expr": "histogram_quantile(0.25, sum(rate(messaging_masstransit_consume_duration_milliseconds_bucket{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval])) by (le)) / 1000",
           "hide": false,
           "instant": false,
           "legendFormat": "Errors (p25)",
@@ -640,7 +640,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\"}[$__rate_interval]))",
+          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\"}[$__rate_interval]))",
           "instant": false,
           "legendFormat": "Requests/s",
           "range": true,
@@ -652,7 +652,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval]))",
+          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Error Requests/s",
@@ -769,7 +769,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval])) by (messaging_masstransit_exception_type)",
+          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval])) by (messaging_masstransit_exception_type)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{error_type}}",
@@ -937,7 +937,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.5, sum(rate(http_server_request_duration_seconds_bucket{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\"}[$__rate_interval])) by (le))",
+          "expr": "histogram_quantile(0.5, sum(rate(http_server_request_duration_seconds_bucket{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\"}[$__rate_interval])) by (le))",
           "instant": false,
           "legendFormat": "OK (p50)",
           "range": true,
@@ -949,7 +949,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.25, sum(rate(http_server_request_duration_seconds_bucket{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",error_type=~\".+\"}[$__rate_interval])) by (le))",
+          "expr": "histogram_quantile(0.25, sum(rate(http_server_request_duration_seconds_bucket{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",error_type=~\".+\"}[$__rate_interval])) by (le))",
           "hide": false,
           "instant": false,
           "legendFormat": "Errors (p25)",
@@ -1065,7 +1065,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(http_server_request_duration_seconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\"}[$__rate_interval]))",
+          "expr": "sum(rate(http_server_request_duration_seconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\"}[$__rate_interval]))",
           "instant": false,
           "legendFormat": "Requests/s",
           "range": true,
@@ -1077,7 +1077,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(http_server_request_duration_seconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",http_response_status_code!~\"2..\"}[$__rate_interval]))",
+          "expr": "sum(rate(http_server_request_duration_seconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",http_response_status_code!~\"2..\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Error Requests/s",
@@ -1194,7 +1194,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(http_server_request_duration_seconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",error_type=~\".+\"}[$__rate_interval])) by (error_type)",
+          "expr": "sum(rate(http_server_request_duration_seconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",error_type=~\".+\"}[$__rate_interval])) by (error_type)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{error_type}}",
@@ -1310,7 +1310,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.5, sum(rate(messaging_masstransit_consume_duration_milliseconds_bucket{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\"}[$__rate_interval])) by (le)) / 1000",
+          "expr": "histogram_quantile(0.5, sum(rate(messaging_masstransit_consume_duration_milliseconds_bucket{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\"}[$__rate_interval])) by (le)) / 1000",
           "instant": false,
           "legendFormat": "OK (p50)",
           "range": true,
@@ -1322,7 +1322,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.25, sum(rate(messaging_masstransit_consume_duration_milliseconds_bucket{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval])) by (le)) / 1000",
+          "expr": "histogram_quantile(0.25, sum(rate(messaging_masstransit_consume_duration_milliseconds_bucket{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval])) by (le)) / 1000",
           "hide": false,
           "instant": false,
           "legendFormat": "Errors (p25)",
@@ -1438,7 +1438,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\"}[$__rate_interval]))",
+          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\"}[$__rate_interval]))",
           "instant": false,
           "legendFormat": "Requests/s",
           "range": true,
@@ -1450,7 +1450,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval]))",
+          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Error Requests/s",
@@ -1567,7 +1567,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{full_service_name=~\"$k8s_namespace_name/$k8s_statefulset_name/$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval])) by (messaging_masstransit_exception_type)",
+          "expr": "sum(rate(messaging_masstransit_consume_duration_milliseconds_count{k8s_namespace_name=~\"$k8s_namespace_name\",k8s_statefulset_name=~\"$k8s_statefulset_name\",k8s_pod_name=~\"$k8s_pod_name\",messaging_masstransit_exception_type=~\".+\"}[$__rate_interval])) by (messaging_masstransit_exception_type)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{error_type}}",
